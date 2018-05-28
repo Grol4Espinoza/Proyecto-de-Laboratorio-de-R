@@ -46,7 +46,7 @@ environment(matrix)
 environment(jpeg)
 ```
 
-##(parte c)
+## (parte c)
 
 Para confirmar que "smoothScatter" pertenece al paquete "graphics" usaremos la funcion "grep()" la cual devuelve la posicion de un string en un vector de strings si este se encuentrase en dicho vector, entonces comparamos el string "smoothScatter" con el vector de strings ls("package:graphics"). Ademas para este caso no es necesario incluir "all.names" en la función ls ya que el string que buscamos no empieza con un ".".
 
