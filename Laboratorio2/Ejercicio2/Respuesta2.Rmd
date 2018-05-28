@@ -1,0 +1,56 @@
+---
+title: "Respuesta2"
+author: "Carlos Alberto Espinoza Mansilla"
+date: "27 de mayo de 2018"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+## Estilo de coincidencia de argumentos
+
+Si se tiene una funcion f con argumentos numero, reto, dimension respectivamente 
+
+```{r}
+f=function(numero, reto, dimension){
+  print(numero)
+  print(reto)
+  print(dimension)
+}
+```
+Entonces se dice que los estilos de coincidencia son:
+
+## Exacto
+
+cuando al llamar a f se igualan los valores a evaluar a los nombres de los argumentos de la siguiente manera:
+
+```{r}
+f(numero=5,dimension=2,reto=4)
+```
+
+Cabe resaltar que como estamos especificando que valores le vamos a dar a cada argumento no es necesario ponerlos en algun orden especifico dentro de la función.
+
+## Parcial
+
+R nos permite escribir solo una parte del nombre del argumento y que el programa lo reconozca automaticamente
+
+```{r}
+f(r=4,num=5,di=2)
+```
+
+## Posicional
+
+si no se quiere escribir el nombre de los argumentos podemos escribir directamente los valores dentro de la funcion siguiendo el orden especifico en que los argumentos fueron definidos en la función para el ejemplo de la función f(numero, reto, dimension) .
+
+```{r}
+f(5,4,2)
+```
+
+## Mixto
+
+Finalmente con mixto se refiere a usar varias de los estilos mencionados arriba.
+
+```{r}
+f(numero=5,r=4,2)
+```
+
