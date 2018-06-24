@@ -1,4 +1,3 @@
-
 ijk_p <- integer(4) 
 ijk_c <- integer(4)
 
@@ -27,7 +26,7 @@ update_stat_cph <- function(vect_stat){
 }
 
 update_stat_o <- function(vect_stat, vect_stat_cp){
-    vect_stat[2] <- vect_stat_cp[1]
+  vect_stat[2] <- vect_stat_cp[1]
   return(vect_stat)
 }
 
@@ -58,14 +57,14 @@ pig <- function(){
   show(ijk_p)
   cat("PC\n")
   show(ijk_c)
-  wdy <- 0
+  dyp <- 1
   #Si juega:
   if(dyp == 1){
     while (ijk_p[4]!=1 && ijk_c[4]!=1) {
       ijk_c[1]
       #Pregunta que desea hacer
       cat("Que desea hacer?\n")
-      cat("1 lanzar dado, 2 pasar turno:\n")
+      cat("1 lanzar dado, 0 pasar turno:\n")
       act <- readline()
       act <- as.integer(act)
       cat("Opcion:\n")
@@ -181,5 +180,3 @@ pig <- function(){
 }
 
 pig()
-
-
