@@ -1,0 +1,45 @@
+---
+title: "Optimal play of the dice game pig"
+author: "Luis Ramos Grados, Carlos Alberto Espinoza Mansilla"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introducción
+Nuestro objetivo con este proyecto es encontrar una forma óptima de jugar(y ganar) el "play of the dice game pig" para esto es necesario conocer las reglas del juego:
+
+El juego inicia
+
+* El primer jugador tira el dado
+* Si saca 1 el puntaje acumulado durante su turno se vuelve cero y su turno termina 
+* Si saca de 2 a 6 el resultado se suma al puntaje de ese turno
+* Ahora el jugador decide si vuelve a tirar el dado o terminar su turno
+* Si el jugador termina su turno el puntaje acumulado durante su turno se suma al puntaje del jugador
+* Si el jugador decide volver a lanzar se repetira el proceso hasta que decida terminar su turno o saque 1
+*El juego termina cuando un jugador logra acumular 100 o mas puntos.
+
+A pesar de que este juego tiene muchas mas variaciones y puede jugarse de 2 a 10 jugadores aqui tomaremos la forma estandar del juego que es la ya descrita y jugada por 2 personas con un dado de 6 lados justo. Trataremos de maximizar nuestrar probabilidades de ganar usando nuestro conocimientos sobre probabilidades y luego computaremos los algoritmos que sean necesarios para resolver el problema con las herramientas que nos da R.
+
+
+## Estado del arte
+
+1. Practical Play of the Dice Game Pig por Todd W. Neller, Clifton G.M. Presser: Siendo conciente de lo complicado del resultado "óptimo" para que un humano lo aplique en un entorno casual, busca una forma que sin ser la mas óptima resulta mas conveniente para jugar de forma optimo de modo casual.
+
+2. Pig (Pig-out): Análisis de una de las variaciones del juego original esta vez con 2 dados.
+
+## Diseño del experimento
+
+## Experimentos y resultados
+
+## Discusión
+
+## Conclusiones
+
+## Bibliografía o Referencias
+
+[1] http://cs.gettysburg.edu/~tneller/papers/umap10.pdf Practical Play of the Dice Game Pig por Todd W. Neller
+
+[2] http://www.durangobill.com/Pig.html Pig (Pig-out)
