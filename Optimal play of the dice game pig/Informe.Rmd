@@ -68,3 +68,5 @@ Bueno, ya hemos contruido un modelo matematico para calcular la probabilidad ópt
 [1] http://cs.gettysburg.edu/~tneller/papers/umap10.pdf Practical Play of the Dice Game Pig por Todd W. Neller
 
 [2] http://www.durangobill.com/Pig.html Pig (Pig-out)
+
+[3] https://people.eecs.berkeley.edu/~pabbeel/cs287-fa12/slides/mdps-exact-methods.pdf
