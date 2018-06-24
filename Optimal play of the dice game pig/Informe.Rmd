@@ -32,6 +32,31 @@ A pesar de que este juego tiene muchas mas variaciones y puede jugarse de 2 a 10
 
 ## Diseño del experimento
 
+Primero vamos a definir de que cosas depende la probabilidad de ganar de nuestro jugador:
+Para un turno cualquiera de nuestro jugador la posibilidad de ganar va a depender de cuantos puntos tengemos (i), de cuantos puntos tiene nuestro oponente (j), de cuantos puntos tenemos acumulados en nuestro turno (k) y de decidir si volver a lanzar el dado o terminar el turno dependiendo de cual me da mas posibilidades de ganar, entonces definimos nuestras posibilidades de ganar como:
+
+$P_{i,j,k}=max(P_{i,j,k,lanzar},P_{i,j,k,terminar})$ 
+
+Donde $P_{i,j,k}$ es la posibilidad de ganar total, $P_{i,j,k,lanzar}$ es la posibilidad de ganar lanzando de nuevo el dado y $P_{i,j,k,terminar}$ es la posibilidad de ganar terminando ese turno.
+
+Ahora si consideramos la situación en la que $i+k\geq 100$ entonces $P_{i,j,k}=1$ porque le basta al jugador con terminar allí su turno para ganar, también podemos establecer limites para i,j,k:
+
+$0\leq i < 100$ , $0\leq j < 100$ y $0\leq k < 100-i$
+
+ahora la probabilidad de ganar terminando nuestro turno va a ser igual a la probabilidad de que nuestro oponente no gane:
+
+$P_{i,j,k,terminar}=1-P_{j,i,0}$ 
+
+Mientras que la probabilida de ganar volviendo a lanzar el dado es la suma de las probabilidades de ganar obteniendo (1,2,3,4,5,6) multiplicado por la posibilidad de que se de dicho resultado:
+
+$P_{i,j,k,lanzar}=[\frac{1}{6}P_{i,j,k+1}+\frac{1}{6}P_{i,j,k+2}+\frac{1}{6}P_{i,j,k+3}+\frac{1}{6}P_{i,j,k+4}+\frac{1}{6}P_{i,j,k+5}+\frac{1}{6}P_{i,j,k+6}]$
+
+pero $P_{i,j,k+1}$ significa que todo el k acumulado se reduce a 0 y termina tu turno por lo $P_{i,j,k+1} = 1-P_{j,i,0}$ ahora:
+
+$P_{i,j,k,lanzar}=\frac{1}{6}[(1-P_{j,i,0})+P_{i,j,k+2}+P_{i,j,k+3}+P_{i,j,k+4}+P_{i,j,k+5}+P_{i,j,k+6}]$
+
+Bueno, ya hemos contruido un modelo matematico para calcular la probabilidad óptima de ganar solo queda resolver.
+
 ## Experimentos y resultados
 
 ## Discusión
