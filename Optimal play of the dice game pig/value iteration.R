@@ -1,20 +1,38 @@
-#el estado "S" es tu posicion en i,j,k en la matriz de 3 dimensiones.
+#establecemos valores posibles para nuestros indices i,j,k
+I=c(1,2) #Para i
+J=c(1,2) #Para j
+K=c(1,2) #Para k
+
+S <-array(NA, c(2,2,2))
+#El estado "S" es tu posicion en i,j,k en la matriz de 3 dimensiones.
+#Donde i representa el puntaje acumalado en el juego, j el puntaje acumulado del oponente durante el juego
+#y k es el puntaje acumulado durante su turno
 #  "no ganar" y "ganar"
 #S[i,j,k]=probabilidad de ganar desde estado s
 
+#Inicializamos el array S con los siguientes valores :
 
-S= array(c(0.1,0.34,0.623,0.2,0.45,1,0.4,1),c(2,2,2)) #array en tres dimensiones
+for (i in I) {
+  for (j in J) {
+    for (k in K) {
+      #Si se tiene el estado en el que seguro 1, se le da 1
+      if(i+k>=4)
+        S[i,j,k] <- 1
+      #Caso contrario, se le asigna una numero aleatorio entre [0,1]
+      else
+        S[i,j,k] <- sample((1:999),1)/1000
+    }
+  }
+}
+#Mostramos el arreglo generado
+S
 
-#el array en R empieza desde 1 asique veremos interpretaremos el indice S[1,2,1] por ejemplo como S[0,1,0]
+#La indexacion en R empieza desde 1, por lo cual interpretaremos el indice S[1,2,1] como S[0,1,0]
 
-I=c(1,2) #establecemos valores posibles para nuestros indices i,j,k
-J=c(1,2)
-K=c(1,2)
+e=0.001  #seteamos el minimo de aproximacion
 
-e=0.001  #seteamos el minimo de aproximación
-
-P=c(0.1,0.34,0.623,0.2,0.45,1,0.4,1) # inicilizado vector que contendra los resultados en cada iteracion
-
+P=as.vector(S) # inicilizado vector que contendra los resultados en cada iteracion
+P
 iteracion=0
 
 m=0
@@ -54,7 +72,3 @@ lines(iteracion,P[,5],type="o",col="black")
 lines(iteracion,P[,7],type="o",col="orange")
 legend("bottomright",col=c("blue","green","red","yellow","black","orange"),legend=c("P(0,0,0)","P(0,0,1)","P(0,1,0)","P(0,1,1)","P(1,0,0)","P(1,1,0)"),lwd=3,bty="n")
 
-for(i in I)
-  for(j in J)
-    for(k in K)
-      cat(sprintf("P(%d,%d,%d)=%f\n", i-1,j-1,k-1,S[i,j,k]))
