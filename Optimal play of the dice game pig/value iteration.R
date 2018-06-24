@@ -54,3 +54,7 @@ lines(iteracion,P[,5],type="o",col="black")
 lines(iteracion,P[,7],type="o",col="orange")
 legend("bottomright",col=c("blue","green","red","yellow","black","orange"),legend=c("P(0,0,0)","P(0,0,1)","P(0,1,0)","P(0,1,1)","P(1,0,0)","P(1,1,0)"),lwd=3,bty="n")
 
+for(i in I)
+  for(j in J)
+    for(k in K)
+      cat(sprintf("P(%d,%d,%d)=%f\n", i-1,j-1,k-1,S[i,j,k]))
