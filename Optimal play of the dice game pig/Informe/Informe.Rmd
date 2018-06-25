@@ -10,8 +10,8 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Introducción
-Nuestro objetivo con este proyecto es encontrar una forma óptima de jugar(y ganar) el "play of the dice game pig" para esto es necesario conocer las reglas del juego:
+## Introducci?n
+Nuestro objetivo con este proyecto es encontrar una forma ?ptima de jugar(y ganar) el "play of the dice game pig" para esto es necesario conocer las reglas del juego:
 
 El juego inicia
 
@@ -28,11 +28,11 @@ A pesar de que este juego tiene muchas mas variaciones y puede jugarse de 2 a 10
 
 ## Estado del arte
 
-1. Practical Play of the Dice Game Pig por Todd W. Neller, Clifton G.M. Presser: Siendo conciente de lo complicado del resultado "óptimo" para que un humano lo aplique en un entorno casual, busca una forma que sin ser la mas óptima resulta mas conveniente para jugar de forma optimo de modo casual.
+1. Practical Play of the Dice Game Pig por Todd W. Neller, Clifton G.M. Presser: Siendo conciente de lo complicado del resultado "?ptimo" para que un humano lo aplique en un entorno casual, busca una forma que sin ser la mas ?ptima resulta mas conveniente para jugar de forma optimo de modo casual.
 
-2. Pig (Pig-out): Análisis de una de las variaciones del juego original esta vez con 2 dados.
+2. Pig (Pig-out): An?lisis de una de las variaciones del juego original esta vez con 2 dados.
 
-## Diseño del experimento
+## Dise?o del experimento
 
 Primero vamos a definir de que cosas depende la probabilidad de ganar de nuestro jugador:
 Para un turno cualquiera de nuestro jugador la posibilidad de ganar va a depender de cuantos puntos tengemos (i), de cuantos puntos tiene nuestro oponente (j), de cuantos puntos tenemos acumulados en nuestro turno (k) y de decidir si volver a lanzar el dado o terminar el turno dependiendo de cual me da mas posibilidades de ganar, entonces definimos nuestras posibilidades de ganar como:
@@ -41,7 +41,7 @@ Para un turno cualquiera de nuestro jugador la posibilidad de ganar va a depende
 
 Donde $P_{i,j,k}$ es la posibilidad de ganar total, $P_{i,j,k,lanzar}$ es la posibilidad de ganar lanzando de nuevo el dado y $P_{i,j,k,terminar}$ es la posibilidad de ganar terminando ese turno.
 
-Ahora si consideramos la situación en la que $i+k\geq 100$ entonces $P_{i,j,k}=1$ porque le basta al jugador con terminar allí su turno para ganar, también podemos establecer limites para i,j,k:
+Ahora si consideramos la situaci?n en la que $i+k\geq 100$ entonces $P_{i,j,k}=1$ porque le basta al jugador con terminar all? su turno para ganar, tambi?n podemos establecer limites para i,j,k:
 
 * $0\leq i < 100$ , $0\leq j < 100$ y $0\leq k < 100-i$
 
@@ -57,16 +57,16 @@ pero $P_{i,j,k+1}$ significa que todo el k acumulado se reduce a 0 y termina tu 
 
 * $P_{i,j,k,lanzar}=\frac{1}{6}[(1-P_{j,i,0})+P_{i,j,k+2}+P_{i,j,k+3}+P_{i,j,k+4}+P_{i,j,k+5}+P_{i,j,k+6}]$
 
-Bueno, ya hemos construido un modelo matemático para calcular la maxima probabilidad de ganar para cada jugada posible solo queda resolver.
+Bueno, ya hemos construido un modelo matem?tico para calcular la maxima probabilidad de ganar para cada jugada posible solo queda resolver.
 
 ## Experimentos y resultados
 
-Para resolver $P_{i,j,k}=max(P_{i,j,k,lanzar},P_{i,j,k,terminar})$ Notamos que nuestro modelo tiene resultados que dependen en parte de la probabilidad (resultado del dado), en parte de la decision que tome el jugado (lanzar el dado o terminar su turno) vemos que tal cual descrito, nuestro modelo se adecua a un MDP (Markov decision process), esto quiere decir que podemos intentar resolverlo mediante uno de los metodos conocidos de solución para MDP en este caso usaremos "VALUE ITERATION".
+Para resolver $P_{i,j,k}=max(P_{i,j,k,lanzar},P_{i,j,k,terminar})$ Notamos que nuestro modelo tiene resultados que dependen en parte de la probabilidad (resultado del dado), en parte de la decision que tome el jugado (lanzar el dado o terminar su turno) vemos que tal cual descrito, nuestro modelo se adecua a un MDP (Markov decision process), esto quiere decir que podemos intentar resolverlo mediante uno de los metodos conocidos de soluci?n para MDP en este caso usaremos "VALUE ITERATION".
 
 #### Value Iteration
 
-Value iteration es un algoritmo que de forma ciclica estima valores para cada estado de un problema hasta llegar a un valor muy aproximado al ótimo. Ahora vamos a considerar la división del problema en estados(s),acciones(a) y recompensas(r) donde para nuestro problema los estados deben ser entendidos como cada situacion posible durante el juego para los i,j,k ,por ejemplo un estado seria la situación donde tengo i=96,j=99,k=2 , tengo 98 puntos , mi oponente 99 y tengo acumulado en ese turno 2 puntos, las acciones son lanzar el dado o terminar el turno y recompensa se define como un valor númerico que sirve para determinar que cambio de estado es mas optimo.
-Si se tiene 2 estados $s,s^{'}\in S$ y tomando la acción $a\in A$ se sabe que hay una $P^{a}_{ss'}$  de que haya un cambio de estado de s a s' a este resultado se le asocia la recompensa $R^{a}_{ss'}$. También es necesario definir V(s) como el valor de estar en el estado "s" basado en las recompensas necesarias para llegar a ese estado y los valores de los estados previos, decimos entonces que el valor estimado de una acción a en el estado s es dado por:
+Value iteration es un algoritmo que de forma ciclica estima valores para cada estado de un problema hasta llegar a un valor muy aproximado al ?timo. Ahora vamos a considerar la divisi?n del problema en estados(s),acciones(a) y recompensas(r) donde para nuestro problema los estados deben ser entendidos como cada situacion posible durante el juego para los i,j,k ,por ejemplo un estado seria la situaci?n donde tengo i=96,j=99,k=2 , tengo 98 puntos , mi oponente 99 y tengo acumulado en ese turno 2 puntos, las acciones son lanzar el dado o terminar el turno y recompensa se define como un valor n?merico que sirve para determinar que cambio de estado es mas optimo.
+Si se tiene 2 estados $s,s^{'}\in S$ y tomando la acci?n $a\in A$ se sabe que hay una $P^{a}_{ss'}$  de que haya un cambio de estado de s a s' a este resultado se le asocia la recompensa $R^{a}_{ss'}$. Tambi?n es necesario definir V(s) como el valor de estar en el estado "s" basado en las recompensas necesarias para llegar a ese estado y los valores de los estados previos, decimos entonces que el valor estimado de una acci?n a en el estado s es dado por:
 
 * $\sum_{s'}P^a_{ss'}[R^a_{ss'}+ \gamma V(s')]$
 
@@ -74,7 +74,7 @@ y entonces la opcion optima es:
 
 * $max_{a\in A}(\sum_{s'}P^a_{ss'}[R^a_{ss'}+ \gamma V(s')])$
 
-Donde $0\leq\gamma<1$ es llamado factor de descuento en indica que tanto nos interesa la recompensa futura de escoger la acción a.
+Donde $0\leq\gamma<1$ es llamado factor de descuento en indica que tanto nos interesa la recompensa futura de escoger la acci?n a.
 
 Aplicando esto a nuestro problema es:
 
@@ -94,19 +94,19 @@ Repetir:
 --------------------$V(s)<-max_{a\in A}(\sum_{s'}P^a_{ss'}[R^a_{ss'}+ \gamma V(s')])$  
 --------------------$\triangle<-max(\triangle,|v-V(s)|)$  
 hasta que $\triangle<e$  
-donde $0< e <1$ indica la aproximación a los valores óptimos
+donde $0< e <1$ indica la aproximaci?n a los valores ?ptimos
 
 ***
 
-Aplicar el algoritmo directamente al "play of the dice game pig" resulta muy complicado por lo que aquí se hará primero un ejemplo con un juego mucho mas simple.
+Aplicar el algoritmo directamente al "play of the dice game pig" resulta muy complicado por lo que aqu? se har? primero un ejemplo con un juego mucho mas simple.
 
 Definamos pues las reglas basicas de modo similar al "play of the dice game pig"
 
 * jugador lanza moneda, si sale cruz termina su turno
 * si sale cara su puntaje de turno sube 1 punto y puede elegir si seguir lanzando o terminar su turno
-* gana quién llegue a 2 puntos primero
+* gana qui?n llegue a 2 puntos primero
 
-El ejemplo esta dado para que sea una versión mas simple y nos permita guiarnos a la solución buscada. Definiendo i como puntaje del jugador, j como puntaje del oponente y k como puntaje de turno, en el caso que i+k=2 $P_{i,j,k}=1$ en el resto de casos donde 0< i,j < 2 y k<2-i , la probabilidad de ganar es:
+El ejemplo esta dado para que sea una versi?n mas simple y nos permita guiarnos a la soluci?n buscada. Definiendo i como puntaje del jugador, j como puntaje del oponente y k como puntaje de turno, en el caso que i+k=2 $P_{i,j,k}=1$ en el resto de casos donde 0< i,j < 2 y k<2-i , la probabilidad de ganar es:
 
 * $max(P_{i,j,k,lanzar},P_{i,j,k,terminar})$
 
@@ -166,11 +166,11 @@ for (i in I) {
 #Mostramos el arreglo generado
 S
 
-#La indexacion en R empieza desde 1, por lo cual interpretaremos el índice S[1,2,1] como S[0,1,0]
+#La indexacion en R empieza desde 1, por lo cual interpretaremos el ?ndice S[1,2,1] como S[0,1,0]
 
-e=0.001  #seteamos el mínimo de aproximación
+e=0.001  #seteamos el m?nimo de aproximaci?n
 
-P=as.vector(S) # inicializamos el vector que contendra los resultados de todas las iteraciónes
+P=as.vector(S) # inicializamos el vector que contendra los resultados de todas las iteraci?nes
 P
 iteracion=0
 
@@ -229,11 +229,24 @@ for(i in I)
 
 Ahora que ya tenemos el algoritmo implementando y una mejor comprension de como funciona vamos a aplicarlo a nuestro objetivo principal el "play of the dice game pig"
 
-## Discusión
+Podemos aplicar el metodo Value Iteration para solucionar las ecuaciones que tenemos para el Dice game pig, un problema seria que la cantidad de ecuaciones que tendriamos son 505000. Esta cantidad de ecuaciones hace que sea muy lento el proceso para llegar a la convergencia de los valores.
+Analizando los estados posible, nos damos cuenta que para pasar de un estado a otro, el estado inicial no tiene un puntaje acumaulado mayor al del estado transitado, pues en el juego no se pierde puntos acumulados. De esto podemos decir que la probabilidad de ganar en un estado con una suma puntajes acumulados dado, es decir i+j, no depende de las probabilidades de otros estados con menor suma de puntajes acumulados.
+Esto nos permite calcular primero con el metodo solo la probabilidad de estados con mayor suma de puntajes acumulados.
+Asi podemos calcular la probabilidad de un estado con una suma de puntajes dado y luego calcular las probabilidades de ganar de un estado con menor suma puntajes acumulados al anterior estado con la probabilidad del estado ya calculado.
+
+Para nuestro juego calculariamos primero $P_{99,99,0}$,cuya suma es 198, luego calculariamos $P_{99,98,0}$ y $P_{98,99,0}$ cuyas sumas son 197 y asi para estados cuyas sumas sean 196, 195, etc., hasta que finalmente calculemos $P_{0,0,k}$ donde $0 \le k \le 99 $
+
+Tambien podemos notar que, la probabilidad de un estado con suma de puntajes acumulados dado depende de
+* estados con mayor suma de puntajes acumulados o
+* estados con puntajes intercabiados (lanzar 1 o terminar turno)
+
+Entonces calcularemos con value iteration lo siguiente: Para un estado dado con puntajes i,j calcularemos $P_{i,j,k}$ donde $0 \le k \le 100-i$ y $P_{j,i,k}$ donde $0 \le k \le 100-j$
+
+## Discusi?n
 
 ## Conclusiones
 
-## Bibliografía o Referencias
+## Bibliograf?a o Referencias
 
 [1] http://cs.gettysburg.edu/~tneller/papers/umap10.pdf Practical Play of the Dice Game Pig por Todd W. Neller
 
