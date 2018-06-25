@@ -47,7 +47,7 @@ Ahora si consideramos la situación en la que $i+k\geq 100$ entonces $P_{i,j,k}=1
 
 ahora la probabilidad de ganar terminando nuestro turno va a ser igual a la probabilidad de que nuestro oponente no gane:
 
-* $P_{i,j,k,terminar}=1-P_{j,i,0}$ 
+* $P_{i,j,k,terminar}=1-P_{j,i+k,0}$ 
 
 Mientras que la probabilida de ganar volviendo a lanzar el dado es la suma de las probabilidades de ganar obteniendo (1,2,3,4,5,6) multiplicado por la posibilidad de que se de dicho resultado:
  
@@ -100,7 +100,7 @@ donde $0< e <1$ indica la aproximación a los valores óptimos
 
 Aplicar el algoritmo directamente al "play of the dice game pig" resulta muy complicado por lo que aquí se hará primero un ejemplo con un juego mucho mas simple.
 
-Definamos puesa las reglas basicas de modo similar al "play of the dice game pig"
+Definamos pues las reglas basicas de modo similar al "play of the dice game pig"
 
 * jugador lanza moneda, si sale cruz termina su turno
 * si sale cara su puntaje de turno sube 1 punto y puede elegir si seguir lanzando o terminar su turno
@@ -132,7 +132,7 @@ luego todos los estados posibles son:
 
 * $P_{1,1,1} = 1$
 
-Implementando el algoritmo: archivo 'value iteration'.R 
+Implementando el algoritmo: Codigo fuente en Codigo_Fuente/'value iteration'.R 
 ```{r echo=FALSE}
 #establecemos valores posibles para nuestros indices i,j,k
 #a pesar de que en el problema se trabaja con valores 0 y 1 R no permite esto asi que se trabajara con valores 1,2:
